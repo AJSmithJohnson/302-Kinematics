@@ -19,10 +19,13 @@ public class LimbController : MonoBehaviour
 
     public float distance;
 
+    public bool grabbing = false;
+
     public float grabRange;
     public float idealDistance;
     public float grabDistance;
     public Vector3 idealPosition;
+    public Vector3 newPosition;
     // Start is called before the first frame update
     void Start()
     {
@@ -41,7 +44,7 @@ public class LimbController : MonoBehaviour
         latch.LookAt(endpoint.position);
         distance = Vector3.Distance(latch.position, target.position);
         
-        if(mobile)
+        if(grabbing)
         {
             if(distance <= grabRange)
             {
@@ -49,18 +52,22 @@ public class LimbController : MonoBehaviour
                 {
                     //store these values into a vector //Add this vector to the final 
                     // latch.position += (latch.position - target.position) * Time.deltaTime;
-                    idealPosition += (latch.position - target.position) * Time.deltaTime;
+                    newPosition += (latch.position - target.position) * Time.deltaTime;
                 }
                 else
                 {
                     // latch.position -= (latch.position - target.position) * Time.deltaTime;
-                    idealPosition -= (latch.position - target.position) * Time.deltaTime;
+                    newPosition += (latch.position + target.position) * Time.deltaTime;
                 }
                 
 
             }
-           
+            idealPosition += newPosition;
         }//Refactor so that this only applies to the grabbing arm
+        if(mobile)
+        {
+
+        }
 
         //what could be issues with this
         //the objects transforms could be fucking up
