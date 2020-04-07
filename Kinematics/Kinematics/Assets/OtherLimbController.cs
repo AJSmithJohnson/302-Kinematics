@@ -29,11 +29,11 @@ public class OtherLimbController : MonoBehaviour
     void Update()
     {
         transform.LookAt(topPoint);
-        movementVector = bottomPoint.position;
+       // movementVector = bottomPoint.position;
         //jointDistance = Vector3.Distance(transform.position, bottomPoint.position);
 
         //If we want to grab the target
-        print((transform.position - target.position).normalized);
+       // print((transform.position - target.position).normalized);
         //Get the distance between the two objects and always try to maintain that
         if(isTargetGrabber)
         {
